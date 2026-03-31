@@ -1,0 +1,1274 @@
+---
+title: "Banks as Liquidity Providers"
+subtitle: "Why Do Banks Both Take Deposits AND Make Loans?"
+author: "Kashyap, Rajan, and Stein (2002), Journal of Finance"
+format:
+  revealjs:
+    output-file: index.html
+    theme: [default, custom.scss]
+    slide-number: true
+    chalkboard: true
+    preview-links: auto
+    logo: ""
+    css: styles.css
+    footer: "FIN 7650 | Presenter: Gajendra Choudhary"
+    smaller: true
+    scrollable: false
+    incremental: false
+    transition: fade
+    background-transition: fade
+---
+
+## The Puzzle
+
+**Traditional View:** Banks do two separate things:
+
+1. **Deposits** (liabilities) → Provide safe, liquid claims
+2. **Loans** (assets) → Allocate capital, monitor borrowers
+
+. . .
+
+**The Big Question:**  
+Why does *one institution* need to do both?
+
+. . .
+
+::: {.callout-note icon=false}
+## Think about it...
+- Finance companies make loans without taking deposits
+- Money market funds take deposits without making loans
+- So why do banks combine them?
+:::
+
+---
+
+## Why This Matters
+
+**Policy Implications:**
+
+::: {.incremental}
+- Should we have "narrow banking"?
+  - Deposits in safe mutual funds
+  - Lending by separate finance companies
+
+- How does monetary policy work?
+  - Bank lending channel requires deposits AND loans together
+:::
+
+. . .
+
+::: {.callout-important}
+## Core Issue
+Is there a *real synergy* or just historical accident?
+:::
+
+---
+
+## The Key Insight
+
+**Both deposits and loan commitments are the same product:**
+
+::: {.fragment .fade-in}
+::: {.callout-tip icon=false}
+## The Unifying Concept
+**The provision of liquidity on demand**
+:::
+:::
+
+. . .
+
+- **Demand deposit** = Put money in, take it out anytime
+- **Loan commitment** = Take money out anytime (up to a limit)
+
+. . .
+
+::: {.fragment .highlight-red}
+**Once a commitment is extended:**  
+It's just a checking account with overdraft privileges!
+:::
+
+---
+
+## The Economic Intuition
+
+**Problem:** Providing liquidity on demand is costly
+
+::: {.incremental}
+- Must hold liquid assets (cash, securities) as buffer stock
+- Liquid assets are expensive:
+  - Foregone interest
+  - Double taxation
+  - Agency costs (managers can misuse liquid assets)
+:::
+
+. . .
+
+::: {.callout-tip}
+## Solution
+Share the buffer stock costs across BOTH sides of balance sheet
+:::
+
+---
+
+## How the Synergy Works
+
+Imagine a bank needs \$20 buffer for potential deposit withdrawals
+
+. . .
+
+::: {.columns}
+::: {.column width="45%"}
+**Scenario 1:** Just deposit-taking
+
+- Hold \$20 in cash
+- Often sits idle when no withdrawals
+:::
+
+::: {.column width="10%"}
+:::
+
+::: {.column width="45%"}
+**Scenario 2:** Deposits + Commitments
+
+- Same \$20 buffer covers BOTH:
+  - Deposit withdrawals (some days)
+  - Commitment takedowns (other days)
+:::
+:::
+
+. . .
+
+::: {.callout-important}
+## The Key
+As long as withdrawals and takedowns aren't perfectly correlated,  
+the same buffer does double duty!
+:::
+
+---
+
+## Historical Evidence
+
+**Medieval Banking** (13th-14th century):
+
+Money changers evolved from:
+
+::: {.incremental}
+1. Changing coins → Opening deposit accounts
+2. Deposits → Allowing overdrafts
+:::
+
+. . .
+
+**Senator Robert Morris (1785):**
+
+::: {.callout-note icon=false appearance="minimal"}
+> "By becoming stockholders in a bank, the merchants had pooled their cash to make it go further... when one does not want his money, it is earning his share of the dividend from another"
+:::
+
+. . .
+
+Deposits and overdrafts were *explicitly seen* as drawing on common liquidity!
+
+# The Model {background-color="#2c5282"}
+
+---
+
+## Model Setup: Timeline
+
+**Three dates:** 0, 1, 2
+
+- Interest rate $i$ (same both periods)
+- All payments at date 2 (no compounding)
+
+. . .
+
+::: {.columns}
+::: {.column width="50%"}
+**Date 0:**
+
+- Bank makes term loans $L$
+- Holds liquid assets $S_0$
+- Issues deposits $D_0$
+- Sells commitments $C$
+:::
+
+::: {.column width="50%"}
+**Date 1:**
+
+- Random deposit withdrawals
+- Random commitment takedowns
+- May need external finance
+:::
+:::
+
+---
+
+## Assets
+
+::: {.columns}
+::: {.column width="50%"}
+**Term Loans** $L$:
+
+- Two-period rate: $r(L)$ where $r_L < 0$ (market power)
+- First-order condition: 
+$$r + Lr_L = 2i$$
+:::
+
+::: {.column width="50%"}
+**Liquid Assets** $S_0$:
+
+- Earn rate $i$ but cost $\tau$ per dollar held
+- Net return: $(i - \tau)S_0$
+:::
+:::
+
+. . .
+
+::: {.callout-note}
+## Market Power: What does $r_L < 0$ mean?
+- Bank faces downward-sloping loan demand: to lend more, must lower interest rate
+- $r_L = dr/dL < 0$: marginal interest rate falls as loan volume increases
+- Assumption only limits scale of lending (avoids infinite loans); not central to synergy story
+:::
+
+. . .
+
+::: {.callout-note}
+## Why are liquid assets costly ($\tau > 0$)?
+- $\tau = i$ if held as non-interest-bearing cash
+- $\tau > 0$ if securities (taxes, agency costs)
+:::
+
+---
+
+## Liabilities
+
+::: {.columns}
+::: {.column width="50%"}
+**Deposits** $D_0$:
+
+- Pay zero interest (or below market)
+- Random fraction $\omega$ withdrawn at date 1
+  - $\omega \in \{0, 1\}$ with equal probability
+- Exogenous "deposit franchise" value
+:::
+
+::: {.column width="50%"}
+**External Finance** $e_0$, $e_1$:
+
+- Date 0: Cost $2i$ (frictionless)
+- Date 1: Cost $ie_1 + \alpha e_1^2/2$ (adverse selection)
+  - $\alpha$ = degree of capital market imperfection
+:::
+:::
+
+---
+
+## Commitments
+
+**Loan Commitments** $C$:
+
+- Revenue: $fC$ where $f_C > 0$, $f_{CC} \leq 0$
+- Random fraction $z$ taken down at date 1
+  - $z \in \{0, 1\}$ with equal probability
+
+. . .
+
+::: {.callout-important}
+## Correlation Parameter
+$\rho$ = prob($\omega = 1 | z = 1$)
+
+- $\rho = 1/2$: independent
+- $\rho = 1$: perfectly positively correlated  
+- $\rho = 0$: perfectly negatively correlated
+:::
+
+---
+
+## Budget Constraints
+
+**Date 0:**
+$$L + S_0 = D_0 + e_0$$
+
+**Date 1:**
+$$L + S_1 + zC = D_0(1-\omega) + e_0 + e_1$$
+
+where $S_1 \geq 0$ (can't short liquid assets)
+
+. . .
+
+::: {.callout-tip}
+## External Finance Need (Date 1)
+$$e_1 = \max[zC + \omega D_0 - S_0, 0]$$
+:::
+
+---
+
+## The Bank's Problem
+
+**Maximize:**
+$$E\{rL + fC + izC + (i-\tau)S_0 + iS_1 - 2ie_0 - ie_1 - \alpha e_1^2/2\}$$
+
+. . .
+
+**Key Trade-offs:**
+
+- More $C$ → More commitment revenue BUT higher expected external finance costs
+- More $S_0$ → Pay cost $\tau$ NOW BUT save on expected external finance costs LATER
+
+---
+
+## First-Order Conditions
+
+::: {.callout-note icon=false}
+## Liquid Assets
+$$\tau = -\frac{\alpha}{2}\frac{dE(e_1^2)}{dS_0}$$
+
+Marginal cost of holding liquidity = Marginal benefit of reduced external finance
+:::
+
+. . .
+
+::: {.callout-note icon=false}
+## Commitments  
+$$f + Cf_C = \frac{\alpha}{2}\frac{dE(e_1^2)}{dC}$$
+
+Marginal revenue from commitments = Marginal cost of increased external finance
+:::
+
+---
+
+## Solving the Model: Four Regions
+
+The solution depends on how $S_0^*$ compares to $C^*$ and $D_0$:
+
+. . .
+
+| Region | Condition | External Finance |
+|--------|-----------|------------------|
+| **1** | $S_0^* \leq \min(C^*, D_0)$ | 3 out of 4 states |
+| **2** | $C^* \leq S_0^* \leq D_0$ | Only if both shocks |
+| **3** | $D_0 \leq S_0^* \leq C^*$ | Only if both shocks |
+| **4** | $S_0^* \geq \max(C^*, D_0)$ | Fully self-insured |
+
+---
+
+## The Synergy (Region 1)
+
+When $S_0^* \leq \min(C^*, D_0)$:
+
+$$S_0^* = \frac{C^* + D_0 - 2(\tau/\alpha)}{2-\rho}$$
+
+$$f + C^*f_C = \frac{\alpha}{4-2\rho}[(2\rho - \rho^2 - 1)D_0 + (1-\rho)C^* + 2(\tau/\alpha)]$$
+
+. . .
+
+**Taking derivative:**
+$$\frac{dC^*}{dD_0} = \frac{\alpha(1-\rho)^2/(4-2\rho)}{d^2(fC)/dC^2 - \alpha(1-\rho)/(4-2\rho)} > 0$$
+
+if $\rho < 1$
+
+---
+
+## Intuition: Why More Deposits → More Commitments
+
+**Simple Example:**
+
+- Bank has \$100 deposits with 20% withdrawal risk
+- Needs \$20 buffer for deposits alone
+
+. . .
+
+**Now add \$20 commitment business:**
+
+::: {.incremental}
+- If commitment takedowns *negatively* correlated with deposit withdrawals:
+  - Same \$20 buffer covers both!
+  - No additional liquid assets needed
+:::
+
+. . .
+
+::: {.callout-tip}
+## More generally (any $\rho < 1$)
+- More deposits → more buffer stock
+- Extra buffer can also cover commitment risk
+- Makes commitments cheaper to offer
+:::
+
+---
+
+## When Does the Synergy Break Down?
+
+**Region 3:** $D_0 \leq S_0^* < C^*$
+
+$$f + C^*f_C = \tau$$
+
+. . .
+
+::: {.callout-warning}
+## Commitment level independent of deposits!
+:::
+
+**Why?**
+
+::: {.incremental}
+- Buffer stock already exceeds maximum deposit withdrawal
+- Deposits alone don't stress liquidity position
+- Adding more deposits adds buffer ONLY for deposit+commitment scenarios
+- No marginal benefit for commitment capacity
+:::
+
+---
+
+## A Numerical Example
+
+**Parameters:** $f(C) = 1 - 0.025C$, $\rho = 0.5$, $\alpha = 0.1$, $\tau = 0.45$
+```{r}
+#| echo: false
+#| fig-width: 10
+#| fig-height: 5.5
+#| warning: false
+#| message: false
+
+library(ggplot2)
+library(patchwork)
+
+# Generate data based on model
+D_seq <- seq(0, 25, 0.5)
+
+# Region 3: C constant
+C_r3 <- rep(11, length(which(D_seq <= 5)))
+S_r3 <- 0.5 * D_seq[1:length(C_r3)] + C_r3[1] - 2*0.45/0.1
+
+# Region 1: both increasing
+idx_r1 <- which(D_seq > 5 & D_seq <= 16)
+C_r1 <- 11 + 0.4*(D_seq[idx_r1] - 5)
+S_r1 <- (C_r1 + D_seq[idx_r1] - 9)/(2-0.5)
+
+# Region 2: C constant, S increasing
+idx_r2 <- which(D_seq > 16)
+C_r2 <- rep(C_r1[length(C_r1)], length(idx_r2))
+S_r2 <- D_seq[idx_r2] + 0.5*C_r2[1] - 9
+
+C_full <- c(C_r3, C_r1, C_r2)
+S_full <- c(S_r3, S_r1, S_r2)
+
+p1 <- ggplot() + 
+  geom_line(aes(x=D_seq, y=S_full), linewidth=1.5, color="steelblue") +
+  geom_vline(xintercept=5, linetype="dashed", alpha=0.4, linewidth=0.8) +
+  geom_vline(xintercept=16, linetype="dashed", alpha=0.4, linewidth=0.8) +
+  annotate("text", x=2.5, y=17, label="Region 3", size=6, fontface="bold") +
+  annotate("text", x=10.5, y=17, label="Region 1\n(Synergy!)", size=6, fontface="bold", color="darkgreen") +
+  annotate("text", x=20, y=17, label="Region 2", size=6, fontface="bold") +
+  labs(x="Deposits", y="Liquid Assets", 
+       title="Panel A: Liquid Assets vs Deposits") +
+  theme_minimal(base_size=16) +
+  theme(plot.title = element_text(hjust = 0.5, face = "bold"))
+
+p2 <- ggplot() + 
+  geom_line(aes(x=D_seq, y=C_full), linewidth=1.5, color="darkred") +
+  geom_vline(xintercept=5, linetype="dashed", alpha=0.4, linewidth=0.8) +
+  geom_vline(xintercept=16, linetype="dashed", alpha=0.4, linewidth=0.8) +
+  annotate("text", x=2.5, y=12.2, label="Region 3", size=6, fontface="bold") +
+  annotate("text", x=10.5, y=12.2, label="Region 1\n(Synergy!)", size=6, fontface="bold", color="darkgreen") +
+  annotate("text", x=20, y=12.2, label="Region 2", size=6, fontface="bold") +
+  labs(x="Deposits", y="Commitments", 
+       title="Panel B: Commitments vs Deposits") +
+  theme_minimal(base_size=16) +
+  theme(plot.title = element_text(hjust = 0.5, face = "bold"))
+
+p1 / p2
+```
+
+---
+
+## Main Predictions
+
+::: {.callout-tip icon=false}
+## Prediction 1 (Across institution types)
+Banks will offer relatively more commitments than other lenders
+:::
+
+. . .
+
+::: {.callout-tip icon=false}
+## Prediction 2 (Within banks - liquid assets)
+$$\frac{\partial (\text{Liquid Assets})}{\partial (\text{Transactions Deposits})} > 0$$
+:::
+
+. . .
+
+::: {.callout-tip icon=false}
+## Prediction 3 (Within banks - commitments)
+$$\frac{\partial (\text{Commitments})}{\partial (\text{Transactions Deposits})} > 0$$
+:::
+
+. . .
+
+**Joint interpretation (IV logic):**  
+Commitments related to liquid assets *driven by* deposits
+
+## Beyond the Model: Additional Implications
+
+::: {.callout-tip icon=false}
+## Extension to Term Lending
+Model focuses on commitments, but there's a natural spillover to term loans
+:::
+
+. . .
+
+**The Logic:**
+
+::: {.incremental}
+1. Bank screens borrower for commitment (sunk cost)
+2. This information is valuable for term loans too
+3. Bank has advantage in offering term loans to same customer
+:::
+
+. . .
+
+::: {.callout-note}
+## Prediction Beyond the Core Model
+Banks' term lending should be disproportionately tilted toward customers who are heavy users of commitments
+
+**Example:** Small firm with volatile working capital needs
+- Heavy user of credit lines → Bank learns about firm
+- Also more likely to get plant/equipment loans from banks (vs. finance companies)
+:::
+
+---
+
+## Relation to Other Theories
+
+**Other explanations for deposits + lending:**
+
+::: {.incremental}
+- **Calomiris & Kahn (1991):** Demandable deposits discipline bank managers
+  - Sequential service → incentives to monitor
+  - But why more for banks than industrial firms?
+
+- **Diamond & Rajan (2001):** Demandable claims let banks "create" liquidity
+  - Can promise more than market value of assets
+:::
+
+. . .
+
+::: {.callout-important}
+## This Paper's Distinctive Contribution
+**Diversification across BOTH sides of balance sheet**
+
+- Others: Diversification across depositors OR across borrowers
+- **Here:** Deposits + Commitments share the same liquidity buffer
+- Focus on *lines of credit* (not just term loans) as key to synergy
+:::
+
+# Empirical Evidence {background-color="#2c5282"}
+
+---
+
+## Data: Banks vs Other Lenders
+
+**National Survey of Small Business Finances (1993)**
+
+- 4,637 small firms
+- All loans from each firm (by 1992)
+- Categorized by lender type AND loan type
+
+. . .
+
+**Key Variables:**
+
+- **Unsecured lines of credit** → Closest to model's commitments
+- **Total lines of credit** → Broader measure
+- Survey question: "Where do you go for *unexpected* credit needs?"
+
+---
+
+## Banks vs Finance Companies
+
+**Lines of Credit (% of lending):**
+
+| Institution Type | Unsecured | Secured | Total Lines |
+|-----------------|-----------|---------|-------------|
+| **Banks/S&Ls** | **31%** | 39% | **70%** |
+| Finance Companies | 5% | 45% | 51% |
+| Insurance Companies | 11% | 5% | 16% |
+
+. . .
+
+::: {.callout-important}
+## Key Finding
+**Banks dominate unsecured commitment lending!**
+
+- 31% vs 5% for finance companies
+- 70% total commitment lending vs 51%
+:::
+
+---
+
+## Unexpected Credit Needs
+
+**"Where do you first look for unexpected short-term credit?"**
+
+::: {.incremental}
+- **Over 70%** said banks
+- Barely 1% said finance companies
+- <1% said insurance companies
+:::
+
+. . .
+
+**Even relative to market share:**
+
+- Finance companies: 11% of total lines
+- Insurance companies: 2% of total lines
+
+. . .
+
+::: {.callout-important}
+**Banks are THE source for unexpected liquidity needs**
+:::
+
+---
+
+## Within-Bank Tests: Data
+
+**Call Reports (1992-1996)**
+
+- All federally insured banks
+- Aggregate to holding company level
+- Time-average over 5 years
+
+. . .
+
+::: {.callout-note}
+## Why time-average?
+- Avoid mechanical correlation from high-frequency shocks
+- Example problem: Builder draws commitment AND withdraws deposits
+  - Would create spurious positive correlation
+- 5-year average = target/steady-state values
+:::
+
+---
+
+## Key Variables
+
+::: {.columns}
+::: {.column width="65%"}
+**DEPRAT:** $\dfrac{\text{Transactions deposits}}{\text{Total deposits}}$
+
+**LIQRAT:** $\dfrac{\text{Cash + Securities + Fed Funds}}{\text{Assets}}$
+
+**SECRAT:** $\dfrac{\text{Securities + Fed Funds}}{\text{Assets}}$
+
+**COMRAT:** $\dfrac{\text{Commitments}}{\text{Commitments + Loans}}$
+:::
+
+::: {.column width="35%"}
+**Controls:**
+
+- Log(Real Assets)
+- Loan composition
+- Regional dummies
+:::
+:::
+
+---
+
+## Descriptive Statistics (Medians)
+
+|  | All Banks | Large | Medium | Small |
+|--|-----------|-------|--------|-------|
+| **N** | 9,262 | 100 | 500 | 8,662 |
+| **LIQRAT** | 0.401 | 0.313 | 0.369 | 0.404 |
+| **DEPRAT** | 0.281 | 0.293 | 0.263 | 0.282 |
+| **COMRAT** | 0.078 | 0.260 | 0.134 | 0.075 |
+
+. . .
+
+**Patterns:**
+
+::: {.incremental}
+- Large banks: More commitment-intensive, less liquid
+- Small banks: Less commitment-intensive, more liquid
+- But DEPRAT similar across sizes
+:::
+
+---
+
+## Prediction 2: Liquid Assets vs Deposits
+
+**Dependent Variable:** LIQRAT = (cash + securities) / assets
+
+|  | All Banks | Large | Medium | Small |
+|--|-----------|-------|--------|-------|
+| **Coef. on DEPRAT** | 0.227*** | 0.313*** | 0.105* | 0.235*** |
+| **(t-stat)** | (16.62) | (2.94) | (1.82) | (16.67) |
+| **Explan. Power** | 0.172 | 0.309 | 0.084 | 0.177 |
+
+. . .
+
+::: {.callout-important}
+## Interpretation (All Banks)
+- 1 std dev ↑ in DEPRAT → 0.172 std dev ↑ in LIQRAT
+- Highly significant, economically large
+- **Banks with more transaction deposits hold more liquid assets**
+:::
+
+---
+
+## Prediction 3: Commitments vs Deposits
+
+**Dependent Variable:** COMRAT = commitments / (commitments + loans)
+
+|  | All Banks | Large | Medium | Small |
+|--|-----------|-------|--------|-------|
+| **Coef. on DEPRAT** | 0.116*** | 0.232*** | 0.160*** | 0.113*** |
+| **(t-stat)** | (20.21) | (3.35) | (5.80) | (19.35) |
+| **Explan. Power** | 0.181 | 0.207 | 0.242 | 0.188 |
+
+. . .
+
+::: {.callout-important}
+## Interpretation
+- Strong positive relationship across ALL size categories
+- 1 std dev ↑ in DEPRAT → 0.18-0.24 std dev ↑ in COMRAT
+- **Banks with more transaction deposits do more commitment lending**
+:::
+
+---
+
+## Addressing Endogeneity
+
+::: {.callout-warning}
+## Concern
+Maybe high loans → mechanically ↓ COMRAT and ↓ DEPRAT?
+:::
+
+. . .
+
+**Solution:** Look at C&I division separately
+
+- **CICOMRAT** = C&I commitments / (C&I commitments + C&I loans)
+- Restrict to banks where C&I = 10-50% of total loans
+
+. . .
+
+::: {.callout-note}
+## Logic (à la Lamont 1997)
+- Even if bank's *overall* capital structure endogenous
+- Unlikely driven by one small division (C&I lending)
+:::
+
+---
+
+## C&I Commitments vs Deposits
+
+**Dependent Variable:** CICOMRAT (C&I commitments / C&I business)
+
+**Sample:** 4,257 banks with C&I loans = 10-50% of total
+
+|  | All Banks | Large | Medium | Small |
+|--|-----------|-------|--------|-------|
+| **Coef. on DEPRAT** | 0.209*** | 0.389*** | 0.406*** | 0.198*** |
+| **(t-stat)** | (9.64) | (2.62) | (4.39) | (8.80) |
+| **Explan. Power** | 0.127 | 0.283 | 0.246 | 0.128 |
+
+. . .
+
+::: {.callout-important}
+**Results robust to endogeneity concerns!**
+
+Even looking at one small lending division, the relationship holds
+:::
+
+# Extensions: Three Follow-up Papers {background-color="#2c5282"}
+
+---
+
+## Gatev & Strahan (2006): The Main Argument
+
+**Banks' Advantage in Hedging Liquidity Risk**
+
+**Core Finding:**
+
+Banks are a "safe haven" during market-wide liquidity shocks
+
+. . .
+
+::: {.columns}
+::: {.column width="48%"}
+**When CP markets freeze:**
+
+- CP spreads widen
+- Investors flee to safety
+- **Deposit inflows to banks**
+:::
+
+::: {.column width="4%"}
+:::
+
+::: {.column width="48%"}
+**Simultaneously:**
+
+- Firms can't roll CP
+- Draw down credit lines
+- **Loan commitments activated**
+:::
+:::
+
+. . .
+
+::: {.callout-important}
+## The Natural Hedge
+The very event that triggers loan demand (commitment takedowns) **also triggers deposit inflows**
+
+→ Banks receive cheap funding exactly when they need it most!
+:::
+
+---
+
+## Gatev & Strahan (2006): Link to KRS
+
+**How this extends KRS (2002):**
+
+::: {.incremental}
+1. **Validates the correlation assumption:**
+   - KRS assumed $\rho < 1$ (imperfect correlation)
+   - Gatev & Strahan show $\rho$ is actually **negative** during crises!
+
+2. **Dynamic buffer replenishment:**
+   - KRS: Static buffer serves double duty
+   - Gatev & Strahan: Buffer *dynamically refills* when most needed
+
+3. **Reintermediation effect:**
+   - Modern deposit insurance → banks become liquidity sinks in crises
+   - Unlike Great Depression (runs from banks to currency)
+:::
+
+. . .
+
+::: {.callout-tip}
+**Implication:** The synergy is even more powerful than KRS modeled
+:::
+
+---
+
+## Gatev, Schuermann & Strahan (2009): The Main Argument {.scrollable}
+
+**Managing Bank Liquidity Risk**
+
+**Core Finding:**
+
+The deposit-commitment synergy is a **risk-management hedge**
+
+. . .
+
+**Empirical Approach:**
+
+- Look at **stock return volatility** (market-based risk measure)
+- Not just quantities (KRS approach), but **prices**
+
+. . .
+
+**Key Results:**
+
+::: {.incremental}
+- Unused commitments normally **increase** bank stock volatility (liquidity risk)
+- BUT: For banks with high transactions deposits, this increase is **offset**
+- Effect varies with market conditions:
+  - **Normal times:** Low correlation (as KRS modeled)
+  - **Stress times:** Strong negative correlation (hedge activates)
+:::
+
+---
+
+## Gatev, Schuermann & Strahan (2009): Link to KRS 
+
+**How this extends KRS (2002):**
+
+::: {.columns}
+::: {.column width="48%"}
+**KRS (2002) approach:**
+
+- Cross-sectional evidence
+- Balance sheet quantities
+- Static model
+
+**Finding:**
+Banks with more deposits hold more commitments
+:::
+
+::: {.column width="4%"}
+:::
+
+::: {.column width="48%"}
+**GSS (2009) approach:**
+
+- Time-series variation
+- Market prices (volatility)
+- State-dependent effects
+
+**Finding:**
+Deposit-commitment synergy reduces systematic risk
+:::
+:::
+
+. . .
+
+::: {.callout-important}
+## Key Insight
+Transactions deposits aren't just a funding source—they're a **liquidity risk insurance policy** for commitment lending
+
+The "double duty" buffer in KRS actually shows up as **lower risk** in market prices
+:::
+
+---
+
+## Acharya & Mora (2015): The Main Argument {.scrollable}
+
+**A Crisis of Banks as Liquidity Providers**
+
+**Core Finding:**
+
+During 2007-2009, the KRS synergy **strained and nearly broke**
+
+. . .
+
+**The "Double Squeeze":**
+
+::: {.incremental}
+1. **Asset side:** Firms drew down credit lines heavily
+   - Borrowers desperate for liquidity
+   - Commitment takedowns surged
+
+2. **Liability side:** Deposit inflows weakened/reversed
+   - Questions about bank solvency
+   - Not a "safe haven" anymore
+
+3. **Result:** Banks became "liquidity seekers" instead of "liquidity providers"
+   - Bid up deposit rates aggressively
+   - Accessed emergency Fed facilities
+:::
+
+---
+
+## Acharya & Mora (2015): Link to KRS
+
+**How this qualifies KRS (2002):**
+
+::: {.callout-warning icon=false}
+## The Synergy is Real but **Conditional**
+:::
+
+. . .
+
+::: {.columns}
+::: {.column width="48%"}
+**When KRS works:**
+
+- Market-wide liquidity shocks
+- Banking sector seen as safe
+- "Flight to safety" → deposits flow in
+- $\rho < 0$ (negative correlation)
+
+**Examples:**
+- 1998 LTCM crisis
+- Normal CP market stress
+:::
+
+::: {.column width="4%"}
+:::
+
+::: {.column width="48%"}
+**When KRS fails:**
+
+- Crisis *within* banking system
+- Bank solvency questioned
+- Deposits flow out or don't arrive
+- $\rho > 0$ (positive correlation)
+
+**Example:**
+- 2007-2009 Financial Crisis
+:::
+:::
+
+. . .
+
+::: {.callout-important}
+## Critical Insight
+KRS synergy requires banking sector credibility. Without it, deposits and commitments become **positively correlated risks** rather than a hedge
+
+Survived 2008 only via massive government intervention
+:::
+
+# Conclusion: The Complete Picture {background-color="#2c5282"}
+
+---
+
+## The Complete Picture
+
+::: {.callout-tip icon=false}
+## Core Insight from KRS (2002)
+> Deposits and loan commitments are both forms of liquidity provision
+
+> Synergy from sharing buffer stock of liquid assets
+:::
+
+. . .
+
+**Key Empirical Findings:**
+
+::: {.incremental}
+1.  Banks dominate commitment lending
+2.  More deposits → More liquid assets
+3.  More deposits → More commitments
+4.  Synergy robust to endogeneity concerns
+:::
+
+---
+
+## What the Extensions Taught Us
+
+::: {.callout-note icon=false}
+## From Gatev & Strahan (2006)
+**Validation & Enhancement**
+
+- Correlation ($\rho$) is actually **negative** during market crises
+- Banks are "safe havens" → deposits flow in when commitments draw down
+- Buffer **dynamically replenishes** when most needed
+- Synergy is **stronger** than KRS initially modeled
+:::
+
+. . .
+
+::: {.callout-note icon=false}
+## From Gatev, Schuermann & Strahan (2009)
+**Market-Based Evidence**
+
+- Synergy shows up in **stock volatility**, not just quantities
+- High-deposit banks have **lower systematic risk** despite commitment exposure
+- Effect is **state-dependent**: Strongest during liquidity stress
+:::
+
+---
+
+## What the Extensions Taught Us (cont.)
+
+::: {.callout-warning icon=false}
+## From Acharya & Mora (2015)
+**The Boundary Condition**
+
+- During 2007-2009: Synergy **strained and nearly broke**
+- When crisis is *within* banking system, deposits dry up
+- Correlation ($\rho$) turns **positive** → Synergy becomes vulnerability
+- Survived only via massive government intervention
+:::
+
+. . .
+
+::: {.callout-important}
+## The Refined View
+The deposit-commitment synergy is **real, powerful, but conditional**
+
+Works when banking sector credible; fails when bank solvency questioned
+:::
+
+---
+
+## Limitations of This Research
+
+::: {.callout-warning icon=false}
+## Model Limitations (KRS 2002)
+
+- **Simplified framework:** Only 3 dates, binary shocks
+- **Static analysis:** Doesn't model dynamic adjustment of buffer stock
+- **No strategic behavior:** Borrowers and depositors don't react to bank policy
+- **Ignores competition:** Market power assumed but not fully modeled
+:::
+
+. . .
+
+::: {.callout-warning icon=false}
+## Empirical Limitations
+
+**KRS (2002):**
+- Cross-sectional data (1993) → Can't establish causality definitively
+- IV approach clever but relies on strong assumptions
+- Doesn't directly observe $\rho$ (the correlation)
+
+**Extension papers:**
+- G&S (2006, 2009): Focused on specific crisis episodes (CP market freezes)
+- A&M (2015): One crisis (2007-09) → Generalizability?
+:::
+
+---
+
+## Questions for Future Research
+
+::: {.incremental}
+**1. What triggers the regime shift?**
+
+- When exactly does $\rho$ flip from negative to positive?
+- Can we develop early warning indicators?
+- Is it a smooth transition or sudden break?
+:::
+
+. . .
+
+::: {.incremental}
+**2. Optimal bank structure?**
+
+- How much commitment capacity per dollar of deposits?
+- Does optimal ratio vary by bank size, type, market conditions?
+- What's the welfare-maximizing level of synergy?
+:::
+
+---
+
+## Questions for Future Research (cont.)
+
+::: {.incremental}
+**3. International evidence?**
+
+- Does synergy hold in different institutional settings?
+- Role of deposit insurance design (explicit vs. implicit)?
+- Countries without deposit insurance → Does synergy still emerge?
+:::
+
+. . .
+
+::: {.incremental}
+**4. Real-time risk management:**
+
+- Can banks track $\rho$ dynamically using transaction data?
+- How should commitment pricing adjust to correlation risk?
+:::
+
+. . .
+
+---
+
+## Questions for Future Research (cont.)
+
+::: {.incremental}
+**5. Global banking complications:**
+
+- How does synergy work for multinational banks?
+- Can foreign deposits hedge domestic commitment risk?
+:::
+
+. . .
+
+::: {.incremental}
+**6. COVID-19 as a natural experiment:**
+
+- Did synergy hold during pandemic-induced crisis?
+- PPP loans + deposit inflows → New evidence on $\rho$?
+- What was different from 2007-09?
+:::
+
+---
+
+## Policy Research Agenda
+
+::: {.callout-note icon=false}
+## Unresolved Policy Questions
+
+**For Regulators:**
+- How to incorporate correlation risk into stress tests?
+- Should liquidity coverage ratios be state-dependent?
+- Optimal capital requirements given synergy benefits and tail risks?
+
+**For Central Banks:**
+- How does synergy affect monetary policy transmission?
+- Design of emergency liquidity facilities to support (not replace) synergy?
+- Communication strategies to maintain banking sector credibility?
+
+**For Macroprudential Policy:**
+- Should commitment exposure limits vary with deposit funding?
+- How to prevent synchronized correlation shifts across banks?
+- Role of countercyclical buffers in preserving synergy?
+:::
+
+---
+
+## Final Takeaways
+
+::: {.callout-tip icon=false}
+## 1. Economic Efficiency
+Banks' combination of deposits and commitments reflects **real synergy**, not just historical accident or regulatory artifact
+
+- Natural hedge during market stress (most of the time)
+- Lower funding costs and systematic risk
+- Efficient provision of liquidity to the economy
+:::
+
+. . .
+
+::: {.callout-warning icon=false}
+## 2. State-Dependent Performance
+The synergy is **conditional** on market perceptions of banking sector health
+
+- **Normal times:** $\rho < 0$ → Stabilizing force
+- **Crisis times:** $\rho > 0$ → Amplifying force
+- Same structure, opposite effects depending on context
+:::
+
+---
+
+## Final Takeaways (cont.)
+
+::: {.callout-important icon=false}
+## 3. Regulatory Challenge
+Policy must balance competing objectives:
+
+- Preserve efficiency gains from synergy in normal times
+- Limit systemic vulnerability when synergy breaks down
+- Maintain credible backstops without excessive moral hazard
+
+**Implication:** Not a binary choice (narrow banking vs. status quo), but nuanced regulation recognizing both benefits and risks
+:::
+
+---
+
+## Thank You!
+
+::: {.r-fit-text}
+**Questions?**
+:::
+
+. . .
+
+The institutional form of commercial banking is neither purely efficient nor purely fragile—it's **both**, and which dominates depends on context.
+
+---
+
+## References {.smaller}
+
+**Main Paper:**
+
+Kashyap, Anil K., Raghuram Rajan, and Jeremy C. Stein. 2002. "Banks as Liquidity Providers: An Explanation for the Coexistence of Lending and Deposit-Taking." *Journal of Finance* 57(1): 33-73.
+
+. . .
+
+**Extension Papers:**
+
+Gatev, Evan, and Philip E. Strahan. 2006. "Banks' Advantage in Hedging Liquidity Risk: Theory and Evidence from the Commercial Paper Market." *Journal of Finance* 61(2): 867-892.
+
+Gatev, Evan, Til Schuermann, and Philip E. Strahan. 2009. "Managing Bank Liquidity Risk: How Deposit-Loan Synergies Vary with Market Conditions." *Review of Financial Studies* 22(3): 995-1020.
+
+Acharya, Viral V., and Nada Mora. 2015. "A Crisis of Banks as Liquidity Providers." *Journal of Finance* 70(1): 1-43.
+
+---
+
+## References (cont.) {.smaller}
+
+**Related Literature:**
+
+Calomiris, Charles W., and Charles M. Kahn. 1991. "The Role of Demandable Debt in Structuring Optimal Banking Arrangements." *American Economic Review* 81(3): 497-513.
+
+Diamond, Douglas W., and Raghuram G. Rajan. 2001. "Liquidity Risk, Liquidity Creation, and Financial Fragility: A Theory of Banking." *Journal of Political Economy* 109(2): 287-327.
+
+Lamont, Owen. 1997. "Cash Flow and Investment: Evidence from Internal Capital Markets." *Journal of Finance* 52(1): 83-109.

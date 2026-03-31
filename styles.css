@@ -1,0 +1,12 @@
+/* Additional custom styles */
+.reveal .slides {
+  text-align: left;
+}
+
+.reveal ul, .reveal ol {
+  margin-left: 0;
+}
+
+.reveal .r-fit-text {
+  font-size: 3em !important;
+}
