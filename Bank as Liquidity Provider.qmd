@@ -173,45 +173,53 @@ Deposits and overdrafts were *explicitly seen* as drawing on common liquidity!
 
 ---
 
-## Model Setup: Timeline
+## Model Setup
+```{mermaid}
+%%| fig-width: 12
+%%| fig-height: 5
+graph LR
+    subgraph Date0["Date 0"]
+        D0A["• Make term loans L<br/>• Hold liquid assets S₀<br/>• Issue deposits D₀<br/>• Sell commitments C<br/>• Issue claims e₀"]
+    end
+    
+    subgraph Date1[" Date 1"]
+        D1A["•withdrawals ωD₀<br/>• commitment takedowns zC<br/>• external finance e₁"]
+    end
+    
+    subgraph Date2[" Date 2"]
+        D2A["All claims settled"]
+    end
+    
+    Date0 -->|"i"| Date1
+    Date1 -->|"i"| Date2
+    
+    style Date0 fill:#e1f5ff,stroke:#0066cc,stroke-width:3px
+    style Date1 fill:#fff4e1,stroke:#ff9900,stroke-width:3px
+    style Date2 fill:#e8f5e9,stroke:#2e7d32,stroke-width:3px
+```
 
-**Three dates:** 0, 1, 2
+::: {.incremental}
+::: {.callout-important}
+## Critical Assumptions
 
-- Interest rate $i$ (same both periods)
-- All payments at date 2 (no compounding)
-
-. . .
-
-::: {.columns}
-::: {.column width="50%"}
-**Date 0:**
-
-- Bank makes term loans $L$
-- Holds liquid assets $S_0$
-- Issues deposits $D_0$
-- Sells commitments $C$
-:::
-
-::: {.column width="50%"}
-**Date 1:**
-
-- Random deposit withdrawals
-- Random commitment takedowns
-- May need external finance
+- **Interest rate $i$:** Same rate both periods (date 0→1 and date 1→2)
+- **No compounding:** All interest, fees, and charges paid at date 2
+- **Two capital market frictions:**
+  - Ex post flow cost (raising external finance)
+  - Ex ante stock cost (holding liquid assets)
 :::
 :::
 
 ---
 
-## Assets
+## Assets {.smaller}
 
 ::: {.columns}
 ::: {.column width="50%"}
 **Term Loans** $L$:
 
-- Two-period rate: $r(L)$ where $r_L < 0$ (market power)
-- First-order condition: 
-$$r + Lr_L = 2i$$
+- Two-period rate: $r(L)$, where $r_L < 0$ (market power)
+- assumption of market power is to limit the scale of lending activities.
 :::
 
 ::: {.column width="50%"}
@@ -219,24 +227,33 @@ $$r + Lr_L = 2i$$
 
 - Earn rate $i$ but cost $\tau$ per dollar held
 - Net return: $(i - \tau)S_0$
+
+**Liquid Assets** $S_1$:
+
+- Remaining liquid asset at date 1 to be hold till date 2.
+- Earn rate $i$ but no $\tau$ for simplicity.
+- assumption of cash can earn economic interest without opporunity cost.
 :::
 :::
 
 . . .
 
+::: {.columns}
+::: {.column width="50%"}
 ::: {.callout-note}
 ## Market Power: What does $r_L < 0$ mean?
 - Bank faces downward-sloping loan demand: to lend more, must lower interest rate
 - $r_L = dr/dL < 0$: marginal interest rate falls as loan volume increases
-- Assumption only limits scale of lending (avoids infinite loans); not central to synergy story
+:::
 :::
 
-. . .
-
+::: {.column width="50%"}
 ::: {.callout-note}
 ## Why are liquid assets costly ($\tau > 0$)?
 - $\tau = i$ if held as non-interest-bearing cash
 - $\tau > 0$ if securities (taxes, agency costs)
+:::
+:::
 :::
 
 ---
@@ -258,6 +275,7 @@ $$r + Lr_L = 2i$$
 
 - Date 0: Cost $2i$ (frictionless)
 - Date 1: Cost $ie_1 + \alpha e_1^2/2$ (adverse selection)
+  - quadratic formulation to indicate incremental cost of financing 
   - $\alpha$ = degree of capital market imperfection
 :::
 :::
@@ -268,9 +286,11 @@ $$r + Lr_L = 2i$$
 
 **Loan Commitments** $C$:
 
-- Revenue: $fC$ where $f_C > 0$, $f_{CC} \leq 0$
+- Revenue: $fC$ where f is fee for C dollars of commitment
+  - $f_C > 0$, $f_{CC} \leq 0$
 - Random fraction $z$ taken down at date 1
   - $z \in \{0, 1\}$ with equal probability
+  - interest rate of $i$ on commitment takedowns.
 
 . . .
 
@@ -285,25 +305,6 @@ $\rho$ = prob($\omega = 1 | z = 1$)
 
 ---
 
-## Budget Constraints
-
-**Date 0:**
-$$L + S_0 = D_0 + e_0$$
-
-**Date 1:**
-$$L + S_1 + zC = D_0(1-\omega) + e_0 + e_1$$
-
-where $S_1 \geq 0$ (can't short liquid assets)
-
-. . .
-
-::: {.callout-tip}
-## External Finance Need (Date 1)
-$$e_1 = \max[zC + \omega D_0 - S_0, 0]$$
-:::
-
----
-
 ## The Bank's Problem
 
 **Maximize:**
@@ -311,29 +312,43 @@ $$E\{rL + fC + izC + (i-\tau)S_0 + iS_1 - 2ie_0 - ie_1 - \alpha e_1^2/2\}$$
 
 . . .
 
-**Key Trade-offs:**
+**Budget Constraints**
 
-- More $C$ → More commitment revenue BUT higher expected external finance costs
-- More $S_0$ → Pay cost $\tau$ NOW BUT save on expected external finance costs LATER
+**Date 0:**
+$$L + S_0 = D_0 + e_0$$
 
----
+**Date 1:**
+$$L + S_1 + zC = D_0(1-\omega) + e_0 + e_1$$
 
-## First-Order Conditions
-
-::: {.callout-note icon=false}
-## Liquid Assets
-$$\tau = -\frac{\alpha}{2}\frac{dE(e_1^2)}{dS_0}$$
-
-Marginal cost of holding liquidity = Marginal benefit of reduced external finance
-:::
+*where* $S_1 \geq 0$ (can't short liquid assets)
 
 . . .
 
-::: {.callout-note icon=false}
-## Commitments  
-$$f + Cf_C = \frac{\alpha}{2}\frac{dE(e_1^2)}{dC}$$
+---
 
-Marginal revenue from commitments = Marginal cost of increased external finance
+## First Order Conditions
+
+::: {.columns}
+::: {.column width="35%"}
+**Term Loans:**
+$$r + Lr_L = 2i$$
+
+**Commitments:**
+$$f + Cf_C = \frac{\alpha}{2} \frac{dE(e_1^2)}{dC}$$
+
+**Liquid Assets:**
+$$\tau = -\frac{\alpha}{2} \frac{dE(e_1^2)}{dS_0}$$
+:::
+
+::: {.column width="65%"}
+::: {.callout-note icon=false}
+## Intuition
+
+- **(5) Term Loans:** Marginal loan revenue equals cost of two-period financing at rate $2i$
+- **(6) Commitments:** Fee income trades off against expected external finance costs
+- **(7) Liquid Assets:** Deadweight cost $\tau$ balances expected savings from lower $e_1$
+:::
+:::
 :::
 
 ---
@@ -353,47 +368,130 @@ The solution depends on how $S_0^*$ compares to $C^*$ and $D_0$:
 
 ---
 
-## The Synergy (Region 1)
+## Proposition 1: The Synergy {.smaller}
 
-When $S_0^* \leq \min(C^*, D_0)$:
+::: {.callout-note icon=false}
+## Region 1 Definition
+Bank must raise external finance in **3 out of 4 states**: $S_0^* \leq \min(C^*, D_0)$
 
-$$S_0^* = \frac{C^* + D_0 - 2(\tau/\alpha)}{2-\rho}$$
-
-$$f + C^*f_C = \frac{\alpha}{4-2\rho}[(2\rho - \rho^2 - 1)D_0 + (1-\rho)C^* + 2(\tau/\alpha)]$$
-
-. . .
-
-**Taking derivative:**
-$$\frac{dC^*}{dD_0} = \frac{\alpha(1-\rho)^2/(4-2\rho)}{d^2(fC)/dC^2 - \alpha(1-\rho)/(4-2\rho)} > 0$$
-
-if $\rho < 1$
-
----
-
-## Intuition: Why More Deposits → More Commitments
-
-**Simple Example:**
-
-- Bank has \$100 deposits with 20% withdrawal risk
-- Needs \$20 buffer for deposits alone
+External finance needed when deposits withdrawn **OR** commitments drawn **OR** both.
+:::
 
 . . .
 
-**Now add \$20 commitment business:**
+**Expected External Finance Cost:**
 
-::: {.incremental}
-- If commitment takedowns *negatively* correlated with deposit withdrawals:
-  - Same \$20 buffer covers both!
-  - No additional liquid assets needed
+::: {style="font-size: 0.82em;"}
+$$E(e_1^2) = \frac{\rho}{2}[(C + D_0 - S_0)^2] + \frac{1-\rho}{2}[(D_0 - S_0)^2 + (C - S_0)^2]$$
 :::
 
 . . .
 
 ::: {.callout-tip}
-## More generally (any $\rho < 1$)
-- More deposits → more buffer stock
-- Extra buffer can also cover commitment risk
-- Makes commitments cheaper to offer
+## Key Insight
+When $\rho < 1$, the **correlation is imperfect**:
+- Sometimes only deposits are withdrawn
+- Sometimes only commitments are drawn
+- The buffer stock $S_0$ can serve **both** needs
+:::
+
+---
+
+## The Synergy: Optimal Liquid Assets
+
+**Derivation:** Substitute equation (9) into FOC (7) and differentiate:
+
+$$\tau = \frac{\alpha}{2}[C^* + D_0 - S_0^*(2-\rho)]$$
+
+Solving for $S_0^*$:
+
+$$S_0^* = \frac{C^* + D_0 - 2(\tau/\alpha)}{2-\rho}$$
+
+::: {.fragment}
+**What this tells us:**
+
+::: {.incremental}
+- $\frac{\partial S_0^*}{\partial D_0} = \frac{1}{2-\rho} > 0$ → More deposits ⇒ More liquid assets
+- $\frac{\partial S_0^*}{\partial C^*} = \frac{1}{2-\rho} > 0$ → More commitments ⇒ More liquid assets
+- $\frac{\partial S_0^*}{\partial \rho} > 0$ → Higher correlation ⇒ Need more buffer (less diversification)
+- When $\rho \to 1$: denominator → 1, need **full** buffer for both
+- When $\rho \to 0$: denominator → 2, can hold **half** the buffer (perfect offset)
+:::
+:::
+
+---
+
+## The Synergy: Optimal Commitments
+
+**Derivation:** Substitute $S_0^*$ from equation (11) into FOC (6):
+
+$$f + C^*f_C = \frac{\alpha}{4-2\rho}[(2\rho - \rho^2 - 1)D_0 + (1-\rho)C^* + 2(\tau/\alpha)]$$
+
+Implicitly differentiate with respect to $D_0$:
+
+$$\frac{dC^*}{dD_0} = \frac{\alpha(1-\rho)^2/(4-2\rho)}{d^2(fC)/dC^2 - \alpha(1-\rho)/(4-2\rho)}$$
+
+::: {.fragment}
+::: {.callout-important}
+## Main Result (Proposition 1)
+
+**Numerator:** $\alpha(1-\rho)^2 < 0$ when $\rho < 1$
+
+**Denominator:** Negative (second-order condition)
+
+**Therefore:** $\frac{dC^*}{dD_0} > 0$ 
+:::
+:::
+
+. . .
+
+**Economic Intuition:**
+
+::: {.incremental}
+1. More deposits $D_0$ → Bank holds more liquid assets $S_0^*$
+2. Extra liquid assets are **idle** when deposits don't withdraw
+3. But they can back **commitment takedowns** in those states
+4. This lowers the marginal cost of offering commitments
+5. **Result:** Bank optimally issues more commitments $C^*$
+:::
+
+---
+
+## Why the Synergy Exists {.smaller}
+
+::: {.columns}
+::: {.column width="55%"}
+```{mermaid}
+%%| fig-width: 6
+%%| fig-height: 4.5
+graph TB
+    D0["Higher Deposits D₀"]
+    S0["Bank Increases Liquid Assets S₀<br/>To buffer deposit withdrawals"]
+    Idle["S₀ sits IDLE when<br/>deposits NOT withdrawn"]
+    Use["S₀ backs COMMITMENT takedowns<br/>Same buffer, BOTH purposes"]
+    C["Lower marginal cost → Bank issues more C*"]
+
+    D0 --> S0
+    S0 --> Idle
+    Idle --> Use
+    Use --> C
+
+    style D0 fill:#e1f5ff,stroke:#0066cc,stroke-width:2px
+    style S0 fill:#fff4e1,stroke:#ff9900,stroke-width:2px
+    style Idle fill:#ffebee,stroke:#c62828,stroke-width:2px
+    style Use fill:#e8f5e9,stroke:#2e7d32,stroke-width:3px
+    style C fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px
+```
+:::
+
+::: {.column width="45%"}
+::: {.callout-tip}
+## The Core Synergy
+When $\rho < 1$, deposit withdrawals and commitment takedowns **don't always happen together**.
+
+The liquid buffer can be **shared** across both activities → **Both $S_0^*$ and $C^*$ increase with $D_0$**
+:::
+:::
 :::
 
 ---
@@ -402,23 +500,68 @@ if $\rho < 1$
 
 **Region 3:** $D_0 \leq S_0^* < C^*$
 
+::: {.callout-note icon=false}
+## The Setup
+- Liquid assets **exceed** maximum deposit withdrawal: $S_0^* > D_0$
+- But liquid assets **less than** maximum commitment takedown: $S_0^* < C^*$
+:::
+
+. . .
+
+**Critical implication:** Deposit withdrawals alone **no longer stress** the bank's liquidity position.
+
+. . .
+
+**When does the bank face a shortfall?**
+- **Only** when both shocks hit simultaneously: $\omega = 1, z = 1$
+- Probability: $\rho/2$
+:::
+
+. . .
+
+::: {.callout-important}
+## The Breakdown
+New deposits → Bank adds liquid assets to cover **only** the dual-shock state
+
+These newly added assets are **strictly earmarked** for worst-case withdrawal risk
+
+→ They provide **NO spare capacity** for commitment expansion
+:::
+
+---
+
+## The Mathematics: Equation (16)
+
+**Optimal commitments in Region 3:**
 $$f + C^*f_C = \tau$$
 
 . . .
 
+**What this equation tells us:**
+
+::: {.columns}
+::: {.column width="50%"}
+**Left side:**  
+Marginal fee revenue from commitments
+:::
+
+::: {.column width="50%"}
+**Right side:**  
+Constant marginal cost of holding liquidity
+:::
+:::
+
+. . .
+
 ::: {.callout-warning}
-## Commitment level independent of deposits!
+## The Critical Feature: What's Missing
+
+**Demand deposits ($D_0$) do not appear anywhere in this equation!**
+
+$$\frac{dC^*}{dD_0} = 0$$
+
+The optimal volume of commitments is **already pinned down** by balancing marginal fee revenue against the constant cost of liquidity.
 :::
-
-**Why?**
-
-::: {.incremental}
-- Buffer stock already exceeds maximum deposit withdrawal
-- Deposits alone don't stress liquidity position
-- Adding more deposits adds buffer ONLY for deposit+commitment scenarios
-- No marginal benefit for commitment capacity
-:::
-
 ---
 
 ## A Numerical Example
@@ -483,31 +626,113 @@ p1 / p2
 
 ---
 
-## Main Predictions
+## Proposition 2: The Global Blueprint
+
+::: {.callout-note icon=false}
+## What Happens as Deposits Grow?
+
+As demand deposits increase from zero to infinity, banks transition through regions:
+
+**Region 3** → **Region 1** → **Region 2**
+
+Throughout this progression:
+- Liquid assets ($S_0^*$) are **weakly increasing** and continuous
+- Commitments ($C^*$) are **weakly increasing** and continuous
+:::
+
+. . .
+
+::: {.columns}
+::: {.column width="33%"}
+**Region 3**  
+(Low deposits)
+
+- Liquid assets rise
+- Commitments **flat**
+- No synergy yet
+:::
+
+::: {.column width="33%"}
+**Region 1**  
+(Medium deposits)
+
+- Liquid assets rise
+- Commitments **rise**
+- ✓ **Synergy zone**
+:::
+
+::: {.column width="33%"}
+**Region 2**  
+(High deposits)
+
+- Liquid assets rise
+- Commitments **flat**
+- At max capacity
+:::
+:::
+
+---
+
+## From Theory to Testable Predictions
 
 ::: {.callout-tip icon=false}
-## Prediction 1 (Across institution types)
-Banks will offer relatively more commitments than other lenders
+## Prediction 1: Across Institution Types
+**Banks will offer relatively more commitments than other lenders**
+
+Why? Only deposit-taking banks can exploit the synergy between demandable deposits and commitment-based lending.
 :::
 
 . . .
 
 ::: {.callout-tip icon=false}
-## Prediction 2 (Within banks - liquid assets)
-$$\frac{\partial (\text{Liquid Assets})}{\partial (\text{Transactions Deposits})} > 0$$
+## Prediction 2: Within Banks — Liquid Assets
+**Banks with more transactions deposits hold more liquid assets**
+
+Why? Higher deposit base → greater withdrawal risk → need larger buffer stock of cash and securities to avoid costly external finance.
+
+**Cross-sectional implication:** Transactions-deposit ratio ↑ → Liquid-asset ratio ↑
 :::
 
 . . .
 
 ::: {.callout-tip icon=false}
-## Prediction 3 (Within banks - commitments)
-$$\frac{\partial (\text{Commitments})}{\partial (\text{Transactions Deposits})} > 0$$
+## Prediction 3: Within Banks — Commitments
+**Banks with more transactions deposits do more commitment lending**
+
+Why? This is the **direct test** of the synergy:
+1. More deposits → more liquid assets (Prediction 2)
+2. When withdrawals and takedowns are imperfectly correlated ($\rho < 1$)
+3. The extra buffer also backs commitment takedowns
+4. Lower marginal cost → banks issue more commitments
+
+**Cross-sectional implication:** Transactions-deposit ratio ↑ → Commitment ratio ↑
 :::
 
-. . .
+---
 
-**Joint interpretation (IV logic):**  
-Commitments related to liquid assets *driven by* deposits
+## The Joint Logic: An IV Interpretation {.smaller}
+
+**Predictions 2 and 3 together validate the synergy:**
+
+```{mermaid}
+%%| fig-width: 11
+%%| fig-height: 3.2
+graph LR
+    TD["Higher Transactions Deposits"]
+    LA["Higher Liquid Assets (Pred. 2)"]
+    COM["Higher Commitments (Pred. 3)"]
+    TD -->|"Direct"| LA
+    TD -->|"Indirect via buffer"| COM
+    LA -.->|"Shared"| COM
+    style TD fill:#e1f5ff,stroke:#0066cc,stroke-width:2px
+    style LA fill:#fff4e1,stroke:#ff9900,stroke-width:2px
+    style COM fill:#e8f5e9,stroke:#2e7d32,stroke-width:2px
+```
+
+::: {.callout-important}
+## The Central Thesis
+Commitments are driven by the **specific component** of liquid assets held to support the deposit franchise. This validates the paper's core claim: deposit-taking and commitment lending are **two sides of the same liquidity-provision function**.
+:::
 
 ## Beyond the Model: Additional Implications
 

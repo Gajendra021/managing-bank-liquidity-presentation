@@ -124,6 +124,9 @@
       margin-right: 0; 
     }
   </style>
+  <script src="Bank as Liquidity Provider_files/libs/quarto-diagram/mermaid.min.js"></script>
+  <script src="Bank as Liquidity Provider_files/libs/quarto-diagram/mermaid-init.js"></script>
+  <link href="Bank as Liquidity Provider_files/libs/quarto-diagram/mermaid.css" rel="stylesheet">
 </head>
 <body class="quarto-light">
   <div class="reveal">
@@ -326,41 +329,68 @@ the same buffer does double duty!</p>
 <h1>The Model</h1>
 
 </section>
-<section id="model-setup-timeline" class="slide level2">
-<h2>Model Setup: Timeline</h2>
-<p><strong>Three dates:</strong> 0, 1, 2</p>
+<section id="model-setup" class="slide level2">
+<h2>Model Setup</h2>
+<div class="cell" data-reveal="true" data-fig-width="12" data-fig-height="5" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class=""><p></p>
+<div>
+<pre class="mermaid mermaid-js">graph LR
+    subgraph Date0["Date 0"]
+        D0A["• Make term loans L&lt;br/&gt;• Hold liquid assets S₀&lt;br/&gt;• Issue deposits D₀&lt;br/&gt;• Sell commitments C&lt;br/&gt;• Issue claims e₀"]
+    end
+    
+    subgraph Date1[" Date 1"]
+        D1A["•withdrawals ωD₀&lt;br/&gt;• commitment takedowns zC&lt;br/&gt;• external finance e₁"]
+    end
+    
+    subgraph Date2[" Date 2"]
+        D2A["All claims settled"]
+    end
+    
+    Date0 --&gt;|"i"| Date1
+    Date1 --&gt;|"i"| Date2
+    
+    style Date0 fill:#e1f5ff,stroke:#0066cc,stroke-width:3px
+    style Date1 fill:#fff4e1,stroke:#ff9900,stroke-width:3px
+    style Date2 fill:#e8f5e9,stroke:#2e7d32,stroke-width:3px
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+<div class="callout callout-important callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Critical Assumptions</strong></p>
+</div>
+<div class="callout-content">
 <ul>
-<li>Interest rate <span class="math inline">\(i\)</span> (same both periods)</li>
-<li>All payments at date 2 (no compounding)</li>
-</ul>
-<div class="fragment">
-<div class="columns">
-<div class="column" style="width:50%;">
-<p><strong>Date 0:</strong></p>
+<li class="fragment"><strong>Interest rate <span class="math inline">\(i\)</span>:</strong> Same rate both periods (date 0→1 and date 1→2)</li>
+<li class="fragment"><strong>No compounding:</strong> All interest, fees, and charges paid at date 2</li>
+<li class="fragment"><strong>Two capital market frictions:</strong>
 <ul>
-<li>Bank makes term loans <span class="math inline">\(L\)</span></li>
-<li>Holds liquid assets <span class="math inline">\(S_0\)</span></li>
-<li>Issues deposits <span class="math inline">\(D_0\)</span></li>
-<li>Sells commitments <span class="math inline">\(C\)</span></li>
+<li class="fragment">Ex post flow cost (raising external finance)</li>
+<li class="fragment">Ex ante stock cost (holding liquid assets)</li>
+</ul></li>
 </ul>
-</div><div class="column" style="width:50%;">
-<p><strong>Date 1:</strong></p>
-<ul>
-<li>Random deposit withdrawals</li>
-<li>Random commitment takedowns</li>
-<li>May need external finance</li>
-</ul>
-</div></div>
+</div>
+</div>
 </div>
 </section>
-<section id="assets" class="slide level2">
+<section id="assets" class="slide level2 smaller">
 <h2>Assets</h2>
 <div class="columns">
 <div class="column" style="width:50%;">
 <p><strong>Term Loans</strong> <span class="math inline">\(L\)</span>:</p>
 <ul>
-<li>Two-period rate: <span class="math inline">\(r(L)\)</span> where <span class="math inline">\(r_L &lt; 0\)</span> (market power)</li>
-<li>First-order condition: <span class="math display">\[r + Lr_L = 2i\]</span></li>
+<li>Two-period rate: <span class="math inline">\(r(L)\)</span>, where <span class="math inline">\(r_L &lt; 0\)</span> (market power)</li>
+<li>assumption of market power is to limit the scale of lending activities.</li>
 </ul>
 </div><div class="column" style="width:50%;">
 <p><strong>Liquid Assets</strong> <span class="math inline">\(S_0\)</span>:</p>
@@ -368,8 +398,16 @@ the same buffer does double duty!</p>
 <li>Earn rate <span class="math inline">\(i\)</span> but cost <span class="math inline">\(\tau\)</span> per dollar held</li>
 <li>Net return: <span class="math inline">\((i - \tau)S_0\)</span></li>
 </ul>
+<p><strong>Liquid Assets</strong> <span class="math inline">\(S_1\)</span>:</p>
+<ul>
+<li>Remaining liquid asset at date 1 to be hold till date 2.</li>
+<li>Earn rate <span class="math inline">\(i\)</span> but no <span class="math inline">\(\tau\)</span> for simplicity.</li>
+<li>assumption of cash can earn economic interest without opporunity cost.</li>
+</ul>
 </div></div>
 <div class="fragment">
+<div class="columns">
+<div class="column" style="width:50%;">
 <div class="callout callout-note callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
@@ -382,13 +420,11 @@ the same buffer does double duty!</p>
 <ul>
 <li>Bank faces downward-sloping loan demand: to lend more, must lower interest rate</li>
 <li><span class="math inline">\(r_L = dr/dL &lt; 0\)</span>: marginal interest rate falls as loan volume increases</li>
-<li>Assumption only limits scale of lending (avoids infinite loans); not central to synergy story</li>
 </ul>
 </div>
 </div>
 </div>
-</div>
-<div class="fragment">
+</div><div class="column" style="width:50%;">
 <div class="callout callout-note callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
@@ -405,6 +441,7 @@ the same buffer does double duty!</p>
 </div>
 </div>
 </div>
+</div></div>
 </div>
 </section>
 <section id="liabilities" class="slide level2">
@@ -426,6 +463,7 @@ the same buffer does double duty!</p>
 <li>Date 0: Cost <span class="math inline">\(2i\)</span> (frictionless)</li>
 <li>Date 1: Cost <span class="math inline">\(ie_1 + \alpha e_1^2/2\)</span> (adverse selection)
 <ul>
+<li>quadratic formulation to indicate incremental cost of financing</li>
 <li><span class="math inline">\(\alpha\)</span> = degree of capital market imperfection</li>
 </ul></li>
 </ul>
@@ -435,10 +473,14 @@ the same buffer does double duty!</p>
 <h2>Commitments</h2>
 <p><strong>Loan Commitments</strong> <span class="math inline">\(C\)</span>:</p>
 <ul>
-<li>Revenue: <span class="math inline">\(fC\)</span> where <span class="math inline">\(f_C &gt; 0\)</span>, <span class="math inline">\(f_{CC} \leq 0\)</span></li>
+<li>Revenue: <span class="math inline">\(fC\)</span> where f is fee for C dollars of commitment
+<ul>
+<li><span class="math inline">\(f_C &gt; 0\)</span>, <span class="math inline">\(f_{CC} \leq 0\)</span></li>
+</ul></li>
 <li>Random fraction <span class="math inline">\(z\)</span> taken down at date 1
 <ul>
 <li><span class="math inline">\(z \in \{0, 1\}\)</span> with equal probability</li>
+<li>interest rate of <span class="math inline">\(i\)</span> on commitment takedowns.</li>
 </ul></li>
 </ul>
 <div class="fragment">
@@ -463,64 +505,39 @@ the same buffer does double duty!</p>
 </div>
 </div>
 </section>
-<section id="budget-constraints" class="slide level2">
-<h2>Budget Constraints</h2>
-<p><strong>Date 0:</strong> <span class="math display">\[L + S_0 = D_0 + e_0\]</span></p>
-<p><strong>Date 1:</strong> <span class="math display">\[L + S_1 + zC = D_0(1-\omega) + e_0 + e_1\]</span></p>
-<p>where <span class="math inline">\(S_1 \geq 0\)</span> (can’t short liquid assets)</p>
-<div class="fragment">
-<div class="callout callout-tip callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<p><strong>External Finance Need (Date 1)</strong></p>
-</div>
-<div class="callout-content">
-<p><span class="math display">\[e_1 = \max[zC + \omega D_0 - S_0, 0]\]</span></p>
-</div>
-</div>
-</div>
-</div>
-</section>
 <section id="the-banks-problem" class="slide level2">
 <h2>The Bank’s Problem</h2>
 <p><strong>Maximize:</strong> <span class="math display">\[E\{rL + fC + izC + (i-\tau)S_0 + iS_1 - 2ie_0 - ie_1 - \alpha e_1^2/2\}\]</span></p>
 <div class="fragment">
-<p><strong>Key Trade-offs:</strong></p>
-<ul>
-<li>More <span class="math inline">\(C\)</span> → More commitment revenue BUT higher expected external finance costs</li>
-<li>More <span class="math inline">\(S_0\)</span> → Pay cost <span class="math inline">\(\tau\)</span> NOW BUT save on expected external finance costs LATER</li>
-</ul>
+<p><strong>Budget Constraints</strong></p>
+<p><strong>Date 0:</strong> <span class="math display">\[L + S_0 = D_0 + e_0\]</span></p>
+<p><strong>Date 1:</strong> <span class="math display">\[L + S_1 + zC = D_0(1-\omega) + e_0 + e_1\]</span></p>
+<p><em>where</em> <span class="math inline">\(S_1 \geq 0\)</span> (can’t short liquid assets)</p>
 </div>
 </section>
 <section id="first-order-conditions" class="slide level2">
-<h2>First-Order Conditions</h2>
+<h2>First Order Conditions</h2>
+<div class="columns">
+<div class="column" style="width:35%;">
+<p><strong>Term Loans:</strong> <span class="math display">\[r + Lr_L = 2i\]</span></p>
+<p><strong>Commitments:</strong> <span class="math display">\[f + Cf_C = \frac{\alpha}{2} \frac{dE(e_1^2)}{dC}\]</span></p>
+<p><strong>Liquid Assets:</strong> <span class="math display">\[\tau = -\frac{\alpha}{2} \frac{dE(e_1^2)}{dS_0}\]</span></p>
+</div><div class="column" style="width:65%;">
 <div class="callout callout-note no-icon callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
-<p><strong>Liquid Assets</strong></p>
+<p><strong>Intuition</strong></p>
 </div>
 <div class="callout-content">
-<p><span class="math display">\[\tau = -\frac{\alpha}{2}\frac{dE(e_1^2)}{dS_0}\]</span></p>
-<p>Marginal cost of holding liquidity = Marginal benefit of reduced external finance</p>
+<ul>
+<li><strong>(5) Term Loans:</strong> Marginal loan revenue equals cost of two-period financing at rate <span class="math inline">\(2i\)</span></li>
+<li><strong>(6) Commitments:</strong> Fee income trades off against expected external finance costs</li>
+<li><strong>(7) Liquid Assets:</strong> Deadweight cost <span class="math inline">\(\tau\)</span> balances expected savings from lower <span class="math inline">\(e_1\)</span></li>
+</ul>
 </div>
 </div>
 </div>
-<div class="fragment">
-<div class="callout callout-note no-icon callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<p><strong>Commitments</strong></p>
-</div>
-<div class="callout-content">
-<p><span class="math display">\[f + Cf_C = \frac{\alpha}{2}\frac{dE(e_1^2)}{dC}\]</span></p>
-<p>Marginal revenue from commitments = Marginal cost of increased external finance</p>
-</div>
-</div>
-</div>
-</div>
+</div></div>
 </section>
 <section id="solving-the-model-four-regions" class="slide level2">
 <h2>Solving the Model: Four Regions</h2>
@@ -559,32 +576,24 @@ the same buffer does double duty!</p>
 </table>
 </div>
 </section>
-<section id="the-synergy-region-1" class="slide level2">
-<h2>The Synergy (Region 1)</h2>
-<p>When <span class="math inline">\(S_0^* \leq \min(C^*, D_0)\)</span>:</p>
-<p><span class="math display">\[S_0^* = \frac{C^* + D_0 - 2(\tau/\alpha)}{2-\rho}\]</span></p>
-<p><span class="math display">\[f + C^*f_C = \frac{\alpha}{4-2\rho}[(2\rho - \rho^2 - 1)D_0 + (1-\rho)C^* + 2(\tau/\alpha)]\]</span></p>
-<div class="fragment">
-<p><strong>Taking derivative:</strong> <span class="math display">\[\frac{dC^*}{dD_0} = \frac{\alpha(1-\rho)^2/(4-2\rho)}{d^2(fC)/dC^2 - \alpha(1-\rho)/(4-2\rho)} &gt; 0\]</span></p>
-<p>if <span class="math inline">\(\rho &lt; 1\)</span></p>
+<section id="proposition-1-the-synergy" class="slide level2 smaller">
+<h2>Proposition 1: The Synergy</h2>
+<div class="callout callout-note no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>Region 1 Definition</strong></p>
 </div>
-</section>
-<section id="intuition-why-more-deposits-more-commitments" class="slide level2">
-<h2>Intuition: Why More Deposits → More Commitments</h2>
-<p><strong>Simple Example:</strong></p>
-<ul>
-<li>Bank has $100 deposits with 20% withdrawal risk</li>
-<li>Needs $20 buffer for deposits alone</li>
-</ul>
+<div class="callout-content">
+<p>Bank must raise external finance in <strong>3 out of 4 states</strong>: <span class="math inline">\(S_0^* \leq \min(C^*, D_0)\)</span></p>
+<p>External finance needed when deposits withdrawn <strong>OR</strong> commitments drawn <strong>OR</strong> both.</p>
+</div>
+</div>
+</div>
 <div class="fragment">
-<p><strong>Now add $20 commitment business:</strong></p>
-<ul>
-<li class="fragment">If commitment takedowns <em>negatively</em> correlated with deposit withdrawals:
-<ul>
-<li class="fragment">Same $20 buffer covers both!</li>
-<li class="fragment">No additional liquid assets needed</li>
-</ul></li>
-</ul>
+<p><strong>Expected External Finance Cost:</strong></p>
+<div style="font-size: 0.82em;">
+<p><span class="math display">\[E(e_1^2) = \frac{\rho}{2}[(C + D_0 - S_0)^2] + \frac{1-\rho}{2}[(D_0 - S_0)^2 + (C - S_0)^2]\]</span></p>
+</div>
 </div>
 <div class="fragment">
 <div class="callout callout-tip callout-titled callout-style-default">
@@ -593,23 +602,169 @@ the same buffer does double duty!</p>
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<p><strong>More generally (any <span class="math inline">\(\rho &lt; 1\)</span>)</strong></p>
+<p><strong>Key Insight</strong></p>
 </div>
 <div class="callout-content">
-<ul>
-<li>More deposits → more buffer stock</li>
-<li>Extra buffer can also cover commitment risk</li>
-<li>Makes commitments cheaper to offer</li>
-</ul>
+<p>When <span class="math inline">\(\rho &lt; 1\)</span>, the <strong>correlation is imperfect</strong>: - Sometimes only deposits are withdrawn - Sometimes only commitments are drawn - The buffer stock <span class="math inline">\(S_0\)</span> can serve <strong>both</strong> needs</p>
 </div>
 </div>
 </div>
 </div>
 </section>
+<section id="the-synergy-optimal-liquid-assets" class="slide level2">
+<h2>The Synergy: Optimal Liquid Assets</h2>
+<p><strong>Derivation:</strong> Substitute equation (9) into FOC (7) and differentiate:</p>
+<p><span class="math display">\[\tau = \frac{\alpha}{2}[C^* + D_0 - S_0^*(2-\rho)]\]</span></p>
+<p>Solving for <span class="math inline">\(S_0^*\)</span>:</p>
+<p><span class="math display">\[S_0^* = \frac{C^* + D_0 - 2(\tau/\alpha)}{2-\rho}\]</span></p>
+<div class="fragment">
+<p><strong>What this tells us:</strong></p>
+<ul>
+<li class="fragment"><span class="math inline">\(\frac{\partial S_0^*}{\partial D_0} = \frac{1}{2-\rho} &gt; 0\)</span> → More deposits ⇒ More liquid assets</li>
+<li class="fragment"><span class="math inline">\(\frac{\partial S_0^*}{\partial C^*} = \frac{1}{2-\rho} &gt; 0\)</span> → More commitments ⇒ More liquid assets</li>
+<li class="fragment"><span class="math inline">\(\frac{\partial S_0^*}{\partial \rho} &gt; 0\)</span> → Higher correlation ⇒ Need more buffer (less diversification)</li>
+<li class="fragment">When <span class="math inline">\(\rho \to 1\)</span>: denominator → 1, need <strong>full</strong> buffer for both</li>
+<li class="fragment">When <span class="math inline">\(\rho \to 0\)</span>: denominator → 2, can hold <strong>half</strong> the buffer (perfect offset)</li>
+</ul>
+</div>
+</section>
+<section id="the-synergy-optimal-commitments" class="slide level2">
+<h2>The Synergy: Optimal Commitments</h2>
+<p><strong>Derivation:</strong> Substitute <span class="math inline">\(S_0^*\)</span> from equation (11) into FOC (6):</p>
+<p><span class="math display">\[f + C^*f_C = \frac{\alpha}{4-2\rho}[(2\rho - \rho^2 - 1)D_0 + (1-\rho)C^* + 2(\tau/\alpha)]\]</span></p>
+<p>Implicitly differentiate with respect to <span class="math inline">\(D_0\)</span>:</p>
+<p><span class="math display">\[\frac{dC^*}{dD_0} = \frac{\alpha(1-\rho)^2/(4-2\rho)}{d^2(fC)/dC^2 - \alpha(1-\rho)/(4-2\rho)}\]</span></p>
+<div class="fragment">
+<div class="callout callout-important callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Main Result (Proposition 1)</strong></p>
+</div>
+<div class="callout-content">
+<p><strong>Numerator:</strong> <span class="math inline">\(\alpha(1-\rho)^2 &lt; 0\)</span> when <span class="math inline">\(\rho &lt; 1\)</span></p>
+<p><strong>Denominator:</strong> Negative (second-order condition)</p>
+<p><strong>Therefore:</strong> <span class="math inline">\(\frac{dC^*}{dD_0} &gt; 0\)</span></p>
+</div>
+</div>
+</div>
+</div>
+<div class="fragment">
+<p><strong>Economic Intuition:</strong></p>
+<ol type="1">
+<li class="fragment">More deposits <span class="math inline">\(D_0\)</span> → Bank holds more liquid assets <span class="math inline">\(S_0^*\)</span></li>
+<li class="fragment">Extra liquid assets are <strong>idle</strong> when deposits don’t withdraw</li>
+<li class="fragment">But they can back <strong>commitment takedowns</strong> in those states</li>
+<li class="fragment">This lowers the marginal cost of offering commitments</li>
+<li class="fragment"><strong>Result:</strong> Bank optimally issues more commitments <span class="math inline">\(C^*\)</span></li>
+</ol>
+</div>
+</section>
+<section id="why-the-synergy-exists" class="slide level2 smaller">
+<h2>Why the Synergy Exists</h2>
+<div class="columns">
+<div class="column" style="width:55%;">
+<div class="cell" data-reveal="true" data-fig-width="6" data-fig-height="4.5" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class=""><p></p>
+<div>
+<pre class="mermaid mermaid-js">graph TB
+    D0["Higher Deposits D₀"]
+    S0["Bank Increases Liquid Assets S₀&lt;br/&gt;To buffer deposit withdrawals"]
+    Idle["S₀ sits IDLE when&lt;br/&gt;deposits NOT withdrawn"]
+    Use["S₀ backs COMMITMENT takedowns&lt;br/&gt;Same buffer, BOTH purposes"]
+    C["Lower marginal cost → Bank issues more C*"]
+
+    D0 --&gt; S0
+    S0 --&gt; Idle
+    Idle --&gt; Use
+    Use --&gt; C
+
+    style D0 fill:#e1f5ff,stroke:#0066cc,stroke-width:2px
+    style S0 fill:#fff4e1,stroke:#ff9900,stroke-width:2px
+    style Idle fill:#ffebee,stroke:#c62828,stroke-width:2px
+    style Use fill:#e8f5e9,stroke:#2e7d32,stroke-width:3px
+    style C fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:45%;">
+<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>The Core Synergy</strong></p>
+</div>
+<div class="callout-content">
+<p>When <span class="math inline">\(\rho &lt; 1\)</span>, deposit withdrawals and commitment takedowns <strong>don’t always happen together</strong>.</p>
+<p>The liquid buffer can be <strong>shared</strong> across both activities → <strong>Both <span class="math inline">\(S_0^*\)</span> and <span class="math inline">\(C^*\)</span> increase with <span class="math inline">\(D_0\)</span></strong></p>
+</div>
+</div>
+</div>
+</div></div>
+</section>
 <section id="when-does-the-synergy-break-down" class="slide level2">
 <h2>When Does the Synergy Break Down?</h2>
 <p><strong>Region 3:</strong> <span class="math inline">\(D_0 \leq S_0^* &lt; C^*\)</span></p>
-<p><span class="math display">\[f + C^*f_C = \tau\]</span></p>
+<div class="callout callout-note no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>The Setup</strong></p>
+</div>
+<div class="callout-content">
+<ul>
+<li>Liquid assets <strong>exceed</strong> maximum deposit withdrawal: <span class="math inline">\(S_0^* &gt; D_0\)</span></li>
+<li>But liquid assets <strong>less than</strong> maximum commitment takedown: <span class="math inline">\(S_0^* &lt; C^*\)</span></li>
+</ul>
+</div>
+</div>
+</div>
+<div class="fragment">
+<p><strong>Critical implication:</strong> Deposit withdrawals alone <strong>no longer stress</strong> the bank’s liquidity position.</p>
+</div>
+<div class="fragment">
+<p><strong>When does the bank face a shortfall?</strong> - <strong>Only</strong> when both shocks hit simultaneously: <span class="math inline">\(\omega = 1, z = 1\)</span> - Probability: <span class="math inline">\(\rho/2\)</span> :::</p>
+</div>
+<div class="fragment">
+<div class="callout callout-important callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>The Breakdown</strong></p>
+</div>
+<div class="callout-content">
+<p>New deposits → Bank adds liquid assets to cover <strong>only</strong> the dual-shock state</p>
+<p>These newly added assets are <strong>strictly earmarked</strong> for worst-case withdrawal risk</p>
+<p>→ They provide <strong>NO spare capacity</strong> for commitment expansion</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="the-mathematics-equation-16" class="slide level2">
+<h2>The Mathematics: Equation (16)</h2>
+<p><strong>Optimal commitments in Region 3:</strong> <span class="math display">\[f + C^*f_C = \tau\]</span></p>
+<div class="fragment">
+<p><strong>What this equation tells us:</strong></p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><strong>Left side:</strong><br>
+Marginal fee revenue from commitments</p>
+</div><div class="column" style="width:50%;">
+<p><strong>Right side:</strong><br>
+Constant marginal cost of holding liquidity</p>
+</div></div>
+</div>
 <div class="fragment">
 <div class="callout callout-warning callout-titled callout-style-default">
 <div class="callout-body">
@@ -617,36 +772,75 @@ the same buffer does double duty!</p>
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<p><strong>Commitment level independent of deposits!</strong></p>
+<p><strong>The Critical Feature: What’s Missing</strong></p>
 </div>
 <div class="callout-content">
-
+<p><strong>Demand deposits (<span class="math inline">\(D_0\)</span>) do not appear anywhere in this equation!</strong></p>
+<p><span class="math display">\[\frac{dC^*}{dD_0} = 0\]</span></p>
+<p>The optimal volume of commitments is <strong>already pinned down</strong> by balancing marginal fee revenue against the constant cost of liquidity.</p>
 </div>
 </div>
 </div>
-<p><strong>Why?</strong></p>
-<ul>
-<li class="fragment">Buffer stock already exceeds maximum deposit withdrawal</li>
-<li class="fragment">Deposits alone don’t stress liquidity position</li>
-<li class="fragment">Adding more deposits adds buffer ONLY for deposit+commitment scenarios</li>
-<li class="fragment">No marginal benefit for commitment capacity</li>
-</ul>
 </div>
 </section>
 <section id="a-numerical-example" class="slide level2">
 <h2>A Numerical Example</h2>
 <p><strong>Parameters:</strong> <span class="math inline">\(f(C) = 1 - 0.025C\)</span>, <span class="math inline">\(\rho = 0.5\)</span>, <span class="math inline">\(\alpha = 0.1\)</span>, <span class="math inline">\(\tau = 0.45\)</span></p>
 
-<img data-src="Bank-as-Liquidity-Provider_files/figure-revealjs/unnamed-chunk-1-1.png" width="960" class="r-stretch"></section>
-<section id="main-predictions" class="slide level2">
-<h2>Main Predictions</h2>
+<img data-src="Bank-as-Liquidity-Provider_files/figure-revealjs/unnamed-chunk-3-1.png" width="960" class="r-stretch"></section>
+<section id="proposition-2-the-global-blueprint" class="slide level2">
+<h2>Proposition 2: The Global Blueprint</h2>
+<div class="callout callout-note no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>What Happens as Deposits Grow?</strong></p>
+</div>
+<div class="callout-content">
+<p>As demand deposits increase from zero to infinity, banks transition through regions:</p>
+<p><strong>Region 3</strong> → <strong>Region 1</strong> → <strong>Region 2</strong></p>
+<p>Throughout this progression: - Liquid assets (<span class="math inline">\(S_0^*\)</span>) are <strong>weakly increasing</strong> and continuous - Commitments (<span class="math inline">\(C^*\)</span>) are <strong>weakly increasing</strong> and continuous</p>
+</div>
+</div>
+</div>
+<div class="fragment">
+<div class="columns">
+<div class="column" style="width:33%;">
+<p><strong>Region 3</strong><br>
+(Low deposits)</p>
+<ul>
+<li>Liquid assets rise</li>
+<li>Commitments <strong>flat</strong></li>
+<li>No synergy yet</li>
+</ul>
+</div><div class="column" style="width:33%;">
+<p><strong>Region 1</strong><br>
+(Medium deposits)</p>
+<ul>
+<li>Liquid assets rise</li>
+<li>Commitments <strong>rise</strong></li>
+<li>✓ <strong>Synergy zone</strong></li>
+</ul>
+</div><div class="column" style="width:33%;">
+<p><strong>Region 2</strong><br>
+(High deposits)</p>
+<ul>
+<li>Liquid assets rise</li>
+<li>Commitments <strong>flat</strong></li>
+<li>At max capacity</li>
+</ul>
+</div></div>
+</div>
+</section>
+<section id="from-theory-to-testable-predictions" class="slide level2">
+<h2>From Theory to Testable Predictions</h2>
 <div class="callout callout-tip no-icon callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
-<p><strong>Prediction 1 (Across institution types)</strong></p>
+<p><strong>Prediction 1: Across Institution Types</strong></p>
 </div>
 <div class="callout-content">
-<p>Banks will offer relatively more commitments than other lenders</p>
+<p><strong>Banks will offer relatively more commitments than other lenders</strong></p>
+<p>Why? Only deposit-taking banks can exploit the synergy between demandable deposits and commitment-based lending.</p>
 </div>
 </div>
 </div>
@@ -654,10 +848,12 @@ the same buffer does double duty!</p>
 <div class="callout callout-tip no-icon callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
-<p><strong>Prediction 2 (Within banks - liquid assets)</strong></p>
+<p><strong>Prediction 2: Within Banks — Liquid Assets</strong></p>
 </div>
 <div class="callout-content">
-<p><span class="math display">\[\frac{\partial (\text{Liquid Assets})}{\partial (\text{Transactions Deposits})} &gt; 0\]</span></p>
+<p><strong>Banks with more transactions deposits hold more liquid assets</strong></p>
+<p>Why? Higher deposit base → greater withdrawal risk → need larger buffer stock of cash and securities to avoid costly external finance.</p>
+<p><strong>Cross-sectional implication:</strong> Transactions-deposit ratio ↑ → Liquid-asset ratio ↑</p>
 </div>
 </div>
 </div>
@@ -666,17 +862,53 @@ the same buffer does double duty!</p>
 <div class="callout callout-tip no-icon callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
-<p><strong>Prediction 3 (Within banks - commitments)</strong></p>
+<p><strong>Prediction 3: Within Banks — Commitments</strong></p>
 </div>
 <div class="callout-content">
-<p><span class="math display">\[\frac{\partial (\text{Commitments})}{\partial (\text{Transactions Deposits})} &gt; 0\]</span></p>
+<p><strong>Banks with more transactions deposits do more commitment lending</strong></p>
+<p>Why? This is the <strong>direct test</strong> of the synergy: 1. More deposits → more liquid assets (Prediction 2) 2. When withdrawals and takedowns are imperfectly correlated (<span class="math inline">\(\rho &lt; 1\)</span>) 3. The extra buffer also backs commitment takedowns 4. Lower marginal cost → banks issue more commitments</p>
+<p><strong>Cross-sectional implication:</strong> Transactions-deposit ratio ↑ → Commitment ratio ↑</p>
 </div>
 </div>
 </div>
 </div>
-<div class="fragment">
-<p><strong>Joint interpretation (IV logic):</strong><br>
-Commitments related to liquid assets <em>driven by</em> deposits</p>
+</section>
+<section id="the-joint-logic-an-iv-interpretation" class="slide level2 smaller">
+<h2>The Joint Logic: An IV Interpretation</h2>
+<p><strong>Predictions 2 and 3 together validate the synergy:</strong></p>
+<div class="cell" data-reveal="true" data-fig-width="11" data-fig-height="3.2" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class=""><p></p>
+<div>
+<pre class="mermaid mermaid-js">graph LR
+    TD["Higher Transactions Deposits"]
+    LA["Higher Liquid Assets (Pred. 2)"]
+    COM["Higher Commitments (Pred. 3)"]
+    TD --&gt;|"Direct"| LA
+    TD --&gt;|"Indirect via buffer"| COM
+    LA -.-&gt;|"Shared"| COM
+    style TD fill:#e1f5ff,stroke:#0066cc,stroke-width:2px
+    style LA fill:#fff4e1,stroke:#ff9900,stroke-width:2px
+    style COM fill:#e8f5e9,stroke:#2e7d32,stroke-width:2px
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+<div class="callout callout-important callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>The Central Thesis</strong></p>
+</div>
+<div class="callout-content">
+<p>Commitments are driven by the <strong>specific component</strong> of liquid assets held to support the deposit franchise. This validates the paper’s core claim: deposit-taking and commitment lending are <strong>two sides of the same liquidity-provision function</strong>.</p>
+</div>
+</div>
 </div>
 </section>
 <section id="beyond-the-model-additional-implications" class="slide level2">
